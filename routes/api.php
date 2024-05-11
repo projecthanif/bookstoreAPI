@@ -12,9 +12,7 @@ Route::group([
     'namespace' => 'App\Http\Controllers\Api\V1'
 ], function () {
 
-    Route::apiResource('users', 'UserController')->except([
-        'delete'
-    ]);
+    Route::apiResource('users', 'UserController');
     Route::apiResource('authors', 'AuthorController')->except([
         'delete'
     ]);

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('status')->default('ongoing');
             $table->date('year_of_publishing')->default(now());
-            $table->foreignId('author_id')->constrained('authors');
+            $table->foreignId('author_id')->constrained('authors')->cascadeOnDelete();
             $table->json('tags')->nullable();
             $table->json('genres');
             $table->longText('description');

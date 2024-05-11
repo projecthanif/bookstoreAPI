@@ -22,14 +22,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreUserRequest $storeUserRequest)
@@ -52,26 +44,28 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateUserRequest $updateUserRequest, User $user)
     {
-        //
+        $validatedUpdate = $updateUserRequest->validated();
+
+        $response = $user->update($validatedUpdate);
+
+        if ($response) {
+            return json_encode(response('upated successfully'));
+        }
+
+        return $response;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $user = $user->delete();
+
+        return $user;
     }
 }

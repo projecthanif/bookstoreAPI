@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\StoreAuthorRequest;
+use App\Http\Requests\V1\UpdateAuthorRequest;
 use App\Http\Resources\Api\V1\AuthorCollection;
 use App\Http\Resources\Api\V1\AuthorResource;
 use App\Models\Author;
@@ -28,5 +29,20 @@ class AuthorController extends Controller
         $author = Author::create($validated);
 
         return new AuthorResource($author);
+    }
+
+    public function update(UpdateAuthorRequest $updateAuthorRequest, Author $author)
+    {
+        $valideatedUpdate = $updateAuthorRequest->validated();
+
+        $response = $author->update($valideatedUpdate);
+
+        return $response;
+    }
+
+    public function delete(Author $author)
+    {
+        $response = $author->delete();
+        return $response;
     }
 }
