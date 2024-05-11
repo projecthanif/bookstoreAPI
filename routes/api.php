@@ -13,9 +13,6 @@ Route::group([
 ], function () {
 
     Route::apiResource('users', 'UserController');
-    Route::apiResource('authors', 'AuthorController')->except([
-        'delete'
-    ]);
-
+    Route::apiResource('authors', 'AuthorController');
     Route::apiResource('books', 'BookController');
 });

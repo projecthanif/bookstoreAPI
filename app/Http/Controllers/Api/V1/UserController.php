@@ -32,7 +32,7 @@ class UserController extends Controller
 
         $user = User::create($validated);
 
-        return new UserResource($user);
+        return new JsonResponse(new UserResource($user), 201);
     }
 
     /**
@@ -66,6 +66,6 @@ class UserController extends Controller
     {
         $user = $user->delete();
 
-        return $user;
+        return new JsonResponse($user, 200);
     }
 }

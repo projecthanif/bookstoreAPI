@@ -8,11 +8,12 @@ use App\Http\Requests\V1\UpdateAuthorRequest;
 use App\Http\Resources\Api\V1\AuthorCollection;
 use App\Http\Resources\Api\V1\AuthorResource;
 use App\Models\Author;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         return new AuthorCollection(Author::all());
     }
@@ -28,7 +29,7 @@ class AuthorController extends Controller
 
         $author = Author::create($validated);
 
-        return new AuthorResource($author);
+        return new JsonResponse(new AuthorResource($author), 201);
     }
 
     public function update(UpdateAuthorRequest $updateAuthorRequest, Author $author)
@@ -37,12 +38,13 @@ class AuthorController extends Controller
 
         $response = $author->update($valideatedUpdate);
 
-        return $response;
+        return new JsonResponse($response, 200);
     }
 
     public function delete(Author $author)
     {
         $response = $author->delete();
-        return $response;
+
+        return new JsonResponse($response, 200);
     }
 }
