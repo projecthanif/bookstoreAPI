@@ -11,6 +11,13 @@ Route::group([
     'prefix' => 'v1',
     'namespace' => 'App\Http\Controllers\Api\V1'
 ], function () {
-    Route::apiResource('authors', 'AuthorController');
+
+    Route::apiResource('users', 'UserController')->except([
+        'delete'
+    ]);
+    Route::apiResource('authors', 'AuthorController')->except([
+        'delete'
+    ]);
+
     Route::apiResource('books', 'BookController');
 });
